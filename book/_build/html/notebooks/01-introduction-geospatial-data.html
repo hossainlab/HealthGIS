@@ -1,0 +1,1231 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to geospatial vector data in Python &#8212; HealthGIS with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpeg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">HealthGIS with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/01-introduction-geospatial-data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/health-gis/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/health-gis/master?urlpath=tree/book/notebooks/01-introduction-geospatial-data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/health-gis/blob/master/book/notebooks/01-introduction-geospatial-data.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importing-geospatial-data">
+   Importing geospatial data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-data">
+   Exploring Data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-a-geodataframe">
+   What’s a GeoDataFrame?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometries-points-linestrings-and-polygons">
+   Geometries: Points, Linestrings and Polygons
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-shapely-library">
+     The
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       shapely
+      </span>
+     </code>
+     library
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-our-different-layers-together">
+   Plotting our different layers together
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-practice">
+   Let’s practice!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for-the-curious-a-bit-more-on-importing-and-creating-geodataframes">
+   For the curious: A bit more on importing and creating GeoDataFrames
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#note-on-fiona">
+     Note on
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       fiona
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#constructing-a-geodataframe-manually">
+     Constructing a GeoDataFrame manually
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-geodataframe-from-an-existing-dataframe">
+     Creating a GeoDataFrame from an existing dataframe
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction-to-geospatial-vector-data-in-python">
+<h1>Introduction to geospatial vector data in Python<a class="headerlink" href="#introduction-to-geospatial-vector-data-in-python" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-geospatial-data">
+<h2>Importing geospatial data<a class="headerlink" href="#importing-geospatial-data" title="Permalink to this headline">¶</a></h2>
+<p>Geospatial data is often available from specific GIS file formats or data stores, like ESRI shapefiles, GeoJSON files, geopackage files, PostGIS (PostgreSQL) database, …</p>
+<p>We can use the GeoPandas library to read many of those GIS file formats (relying on the <code class="docutils literal notranslate"><span class="pre">fiona</span></code> library under the hood, which is an interface to GDAL/OGR), using the <code class="docutils literal notranslate"><span class="pre">geopandas.read_file()</span></code> function.</p>
+<p>For example, let’s start by reading a shapefile with all the countries of the world (adapted from <a class="reference external" href="http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/">http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/</a>, zip file is available in the <code class="docutils literal notranslate"><span class="pre">/data</span></code> directory), and inspect the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read data </span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://../data/ne_110m_admin_0_countries.zip&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_a3</th>
+      <th>name</th>
+      <th>continent</th>
+      <th>pop_est</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>Asia</td>
+      <td>34124811.0</td>
+      <td>64080.0</td>
+      <td>POLYGON ((61.21082 35.65007, 62.23065 35.27066...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AGO</td>
+      <td>Angola</td>
+      <td>Africa</td>
+      <td>29310273.0</td>
+      <td>189000.0</td>
+      <td>MULTIPOLYGON (((23.90415 -11.72228, 24.07991 -...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ALB</td>
+      <td>Albania</td>
+      <td>Europe</td>
+      <td>3047987.0</td>
+      <td>33900.0</td>
+      <td>POLYGON ((21.02004 40.84273, 20.99999 40.58000...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ARE</td>
+      <td>United Arab Emirates</td>
+      <td>Asia</td>
+      <td>6072475.0</td>
+      <td>667200.0</td>
+      <td>POLYGON ((51.57952 24.24550, 51.75744 24.29407...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ARG</td>
+      <td>Argentina</td>
+      <td>South America</td>
+      <td>44293293.0</td>
+      <td>879400.0</td>
+      <td>MULTIPOLYGON (((-66.95992 -54.89681, -67.56244...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># reading shape files </span>
+<span class="c1"># countries = data = gpd.read_file(r&#39;../shapefiles/world.shp&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exploring-data">
+<h2>Exploring Data<a class="headerlink" href="#exploring-data" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># type of dataframe </span>
+<span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geopandas.geodataframe.GeoDataFrame
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># shape </span>
+<span class="n">data</span><span class="o">.</span><span class="n">shape</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(177, 6)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dtypes </span>
+<span class="n">data</span><span class="o">.</span><span class="n">dtypes</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iso_a3          object
+name            object
+continent       object
+pop_est        float64
+gdp_md_est     float64
+geometry      geometry
+dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># columns </span>
+<span class="n">data</span><span class="o">.</span><span class="n">columns</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;iso_a3&#39;, &#39;name&#39;, &#39;continent&#39;, &#39;pop_est&#39;, &#39;gdp_md_est&#39;, &#39;geometry&#39;], dtype=&#39;object&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># info </span>
+<span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;geopandas.geodataframe.GeoDataFrame&#39;&gt;
+RangeIndex: 177 entries, 0 to 176
+Data columns (total 6 columns):
+ #   Column      Non-Null Count  Dtype   
+---  ------      --------------  -----   
+ 0   iso_a3      177 non-null    object  
+ 1   name        177 non-null    object  
+ 2   continent   177 non-null    object  
+ 3   pop_est     177 non-null    float64 
+ 4   gdp_md_est  177 non-null    float64 
+ 5   geometry    177 non-null    geometry
+dtypes: float64(2), geometry(1), object(3)
+memory usage: 8.4+ KB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_a3</th>
+      <th>name</th>
+      <th>continent</th>
+      <th>pop_est</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>Asia</td>
+      <td>34124811.0</td>
+      <td>64080.0</td>
+      <td>POLYGON ((61.21082 35.65007, 62.23065 35.27066...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AGO</td>
+      <td>Angola</td>
+      <td>Africa</td>
+      <td>29310273.0</td>
+      <td>189000.0</td>
+      <td>MULTIPOLYGON (((23.90415 -11.72228, 24.07991 -...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ALB</td>
+      <td>Albania</td>
+      <td>Europe</td>
+      <td>3047987.0</td>
+      <td>33900.0</td>
+      <td>POLYGON ((21.02004 40.84273, 20.99999 40.58000...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ARE</td>
+      <td>United Arab Emirates</td>
+      <td>Asia</td>
+      <td>6072475.0</td>
+      <td>667200.0</td>
+      <td>POLYGON ((51.57952 24.24550, 51.75744 24.29407...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ARG</td>
+      <td>Argentina</td>
+      <td>South America</td>
+      <td>44293293.0</td>
+      <td>879400.0</td>
+      <td>MULTIPOLYGON (((-66.95992 -54.89681, -67.56244...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/01-introduction-geospatial-data_13_0.png" src="../_images/01-introduction-geospatial-data_13_0.png" />
+</div>
+</div>
+<p>What can we observe:</p>
+<ul class="simple">
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">.head()</span></code> we can see the first rows of the dataset, just like we can do with Pandas.</p></li>
+<li><p>There is a ‘geometry’ column and the different countries are represented as polygons</p></li>
+<li><p>We can use the <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> method to quickly get a <em>basic</em> visualization of the data</p></li>
+</ul>
+</div>
+<div class="section" id="what-s-a-geodataframe">
+<h2>What’s a GeoDataFrame?<a class="headerlink" href="#what-s-a-geodataframe" title="Permalink to this headline">¶</a></h2>
+<p>We used the GeoPandas library to read in the geospatial data, and this returned us a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geopandas.geodataframe.GeoDataFrame
+</pre></div>
+</div>
+</div>
+</div>
+<p>A GeoDataFrame contains a tabular, geospatial dataset:</p>
+<ul class="simple">
+<li><p>It has a <strong>‘geometry’ column</strong> that holds the geometry information (or features in GeoJSON).</p></li>
+<li><p>The other columns are the <strong>attributes</strong> (or properties in GeoJSON) that describe each of the geometries</p></li>
+</ul>
+<p>Such a <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> is just like a pandas <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>, but with some additional functionality for working with geospatial data:</p>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">.geometry</span></code> attribute that always returns the column with the geometry information (returning a GeoSeries). The column name itself does not necessarily need to be ‘geometry’, but it will always be accessible as the <code class="docutils literal notranslate"><span class="pre">.geometry</span></code> attribute.</p></li>
+<li><p>It has some extra methods for working with spatial data (area, distance, buffer, intersection, …), which we will see in later notebooks</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">geometry</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      POLYGON ((61.21082 35.65007, 62.23065 35.27066...
+1      MULTIPOLYGON (((23.90415 -11.72228, 24.07991 -...
+2      POLYGON ((21.02004 40.84273, 20.99999 40.58000...
+3      POLYGON ((51.57952 24.24550, 51.75744 24.29407...
+4      MULTIPOLYGON (((-66.95992 -54.89681, -67.56244...
+                             ...                        
+172    MULTIPOLYGON (((167.84488 -16.46633, 167.51518...
+173    POLYGON ((52.00001 19.00000, 52.78218 17.34974...
+174    POLYGON ((19.89577 -24.76779, 20.16573 -24.917...
+175    POLYGON ((23.21505 -17.52312, 22.56248 -16.898...
+176    POLYGON ((29.43219 -22.09131, 28.79466 -21.639...
+Name: geometry, Length: 177, dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geopandas.geoseries.GeoSeries
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">area</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_17973/1639781399.py:1: UserWarning: Geometry is in a geographic CRS. Results from &#39;area&#39; are likely incorrect. Use &#39;GeoSeries.to_crs()&#39; to re-project geometries to a projected CRS before this operation.
+
+  data.geometry.area
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0       63.593500
+1      103.599439
+2        3.185163
+3        7.095047
+4      278.923392
+          ...    
+172      0.631326
+173     38.475618
+174    112.718524
+175     62.789498
+176     32.280371
+Length: 177, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>It’s still a DataFrame</strong>, so we have all the pandas functionality available to use on the geospatial dataset, and to do data manipulations with the attributes and geometry information together.</p>
+<p>For example, we can calculate average population number over all countries (by accessing the ‘pop_est’ column, and calling the <code class="docutils literal notranslate"><span class="pre">mean</span></code> method on it):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;pop_est&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41712369.84180791
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or, we can use boolean filtering to select a subset of the dataframe based on a condition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">africa</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;continent&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Africa&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">africa</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/01-introduction-geospatial-data_25_1.png" src="../_images/01-introduction-geospatial-data_25_1.png" />
+</div>
+</div>
+<hr class="docutils" />
+<p>The rest of the tutorial is going to assume you already know some pandas basics, but we will try to give hints for that part for those that are not familiar.<br />
+A few resources in case you want to learn more about pandas:</p>
+<ul class="simple">
+<li><p>Pandas docs: <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/10min.html">https://pandas.pydata.org/pandas-docs/stable/10min.html</a></p></li>
+<li><p>Other tutorials: chapter from pandas in <a class="reference external" href="https://jakevdp.github.io/PythonDataScienceHandbook/">https://jakevdp.github.io/PythonDataScienceHandbook/</a>, <a class="reference external" href="https://github.com/jorisvandenbossche/pandas-tutorial">https://github.com/jorisvandenbossche/pandas-tutorial</a>, <a class="reference external" href="https://github.com/TomAugspurger/pandas-head-to-tail">https://github.com/TomAugspurger/pandas-head-to-tail</a>, …</p></li>
+</ul>
+<div class="alert alert-info" style="font-size:120%">
+<p><strong>REMEMBER:</strong> <br></p>
+<ul class="simple">
+<li><p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> allows to perform typical tabular data analysis together with spatial operations</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> (or <em>Feature Collection</em>) consists of:</p>
+<ul>
+<li><p><strong>Geometries</strong> or <strong>features</strong>: the spatial objects</p></li>
+<li><p><strong>Attributes</strong> or <strong>properties</strong>: columns with information about each spatial object</p></li>
+</ul>
+</li>
+</ul>
+</div></div>
+<div class="section" id="geometries-points-linestrings-and-polygons">
+<h2>Geometries: Points, Linestrings and Polygons<a class="headerlink" href="#geometries-points-linestrings-and-polygons" title="Permalink to this headline">¶</a></h2>
+<p>Spatial <strong>vector</strong> data can consist of different types, and the 3 fundamental types are:</p>
+<p><img alt="" src="../_images/simple_features_3_text.svg" /></p>
+<ul class="simple">
+<li><p><strong>Point</strong> data: represents a single point in space.</p></li>
+<li><p><strong>Line</strong> data (“LineString”): represents a sequence of points that form a line.</p></li>
+<li><p><strong>Polygon</strong> data: represents a filled area.</p></li>
+</ul>
+<p>And each of them can also be combined in multi-part geometries (See <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#geometric-objects">https://shapely.readthedocs.io/en/stable/manual.html#geometric-objects</a> for extensive overview).</p>
+<p>For the example we have seen up to now, the individual geometry objects are Polygons:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>POLYGON ((21.0200403174764 40.84272695572588, 20.99998986174722 40.58000397395401, 20.67499677906363 40.43499990494303, 20.61500044117275 40.11000682225935, 20.15001590341052 39.62499766698397, 19.98000044117015 39.69499339452341, 19.96000166187321 39.91500580500605, 19.40608198413673 40.25077342382247, 19.31905887215714 40.72723012955356, 19.40354983895429 41.40956574153546, 19.54002729663711 41.71998607031276, 19.37176883309496 41.87754751237065, 19.37176816334725 41.8775506797835, 19.30448611825079 42.19574514420782, 19.73805138517963 42.68824738216557, 19.80161339689869 42.50009349219084, 20.07070000000004 42.58863000000008, 20.28375451018189 42.32025950781508, 20.52295000000004 42.21787000000006, 20.59024654668023 41.85540891928363, 20.59024743010491 41.85540416113361, 20.4631750830992 41.51508901627534, 20.60518191903736 41.08622630468523, 21.0200403174764 40.84272695572588))
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s import some other datasets with different types of geometry objects.</p>
+<p>A dateset about cities in the world (adapted from <a class="reference external" href="http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-populated-places/">http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-populated-places/</a>, zip file is available in the <code class="docutils literal notranslate"><span class="pre">/data</span></code> directory), consisting of Point data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./data/ne_110m_populated_places.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">cities</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>POINT (12.45338654497177 41.90328217996012)
+</pre></div>
+</div>
+</div>
+</div>
+<p>And a dataset of rivers in the world (from <a class="reference external" href="http://www.naturalearthdata.com/downloads/50m-physical-vectors/50m-rivers-lake-centerlines/">http://www.naturalearthdata.com/downloads/50m-physical-vectors/50m-rivers-lake-centerlines/</a>, zip file is available in the <code class="docutils literal notranslate"><span class="pre">/data</span></code> directory) where each river is a (multi-)line:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rivers</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./data/ne_50m_rivers_lake_centerlines.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">rivers</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LINESTRING (51.9371337598152 55.70106609892139, 51.88086646731369 55.68625891701544, 51.82031249962222 55.69745514553858, 51.7476018274624 55.69366250841807, 51.6628417966117 55.60817291874525, 51.57871093775964 55.59943268477065, 51.51342773400279 55.58312409100404, 51.50854492161091 55.52948639548083, 51.48583984403365 55.49640534033426, 51.36914062543957 55.46796295772435, 51.21306254869774 55.50264985760492, 51.13452148447897 55.48273346527725, 51.07934570274205 55.46759674659262, 50.98022460947817 55.46637604371949, 50.83445217522774 55.45630956063775, 50.6883789060617 55.42011139502489, 50.4118652342932 55.40119049644431, 50.07802734358711 55.38112213757665, 49.82216796867687 55.33466217681809, 49.53222656260584 55.260614325191, 49.38232421848795 55.17182037990665, 49.24808475131027 55.11301870345045)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-shapely-library">
+<h3>The <code class="docutils literal notranslate"><span class="pre">shapely</span></code> library<a class="headerlink" href="#the-shapely-library" title="Permalink to this headline">¶</a></h3>
+<p>The individual geometry objects are provided by the <a class="reference external" href="https://shapely.readthedocs.io/en/stable/"><code class="docutils literal notranslate"><span class="pre">shapely</span></code></a> library</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">countries</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shapely.geometry.polygon.Polygon
+</pre></div>
+</div>
+</div>
+</div>
+<p>To construct one ourselves:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span><span class="p">,</span> <span class="n">Polygon</span><span class="p">,</span> <span class="n">LineString</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>POINT (0 0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon</span> <span class="o">=</span> <span class="n">Polygon</span><span class="p">([(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon</span><span class="o">.</span><span class="n">area</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">polygon</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4142135623730951
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" style="font-size:120%">
+<p><strong>REMEMBER</strong>: <br></p>
+<p>Single geometries are represented by <code class="docutils literal notranslate"><span class="pre">shapely</span></code> objects:</p>
+<ul class="simple">
+<li><p>If you access a single geometry of a GeoDataFrame, you get a shapely geometry object</p></li>
+<li><p>Those objects have similar functionality as geopandas objects (GeoDataFrame/GeoSeries). For example:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">single_shapely_object.distance(other_point)</span></code> -&gt; distance between two points</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">geodataframe.distance(other_point)</span></code> -&gt;  distance for each point in the geodataframe to the other point</p></li>
+</ul>
+</li>
+</ul>
+</div></div>
+</div>
+<div class="section" id="plotting-our-different-layers-together">
+<h2>Plotting our different layers together<a class="headerlink" href="#plotting-our-different-layers-together" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">countries</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">rivers</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">cities</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(-20.0, 60.0), (-40.0, 40.0)]
+</pre></div>
+</div>
+<img alt="../_images/01-introduction-geospatial-data_48_1.png" src="../_images/01-introduction-geospatial-data_48_1.png" />
+</div>
+</div>
+<p>See the <span class="xref myst">04-more-on-visualization.ipynb</span> notebook for more details on visualizing geospatial datasets.</p>
+</div>
+<div class="section" id="let-s-practice">
+<h2>Let’s practice!<a class="headerlink" href="#let-s-practice" title="Permalink to this headline">¶</a></h2>
+<p>Throughout the exercises in this course, we will work with several datasets about the city of Paris.</p>
+<p>Here, we start with the following datasets:</p>
+<ul class="simple">
+<li><p>The administrative districts of Paris (<a class="reference external" href="https://opendata.paris.fr/explore/dataset/quartier_paris/">https://opendata.paris.fr/explore/dataset/quartier_paris/</a>): <code class="docutils literal notranslate"><span class="pre">paris_districts_utm.geojson</span></code></p></li>
+<li><p>Real-time (at the moment I downloaded them ..) information about the public bicycle sharing system in Paris (vélib, <a class="reference external" href="https://opendata.paris.fr/explore/dataset/stations-velib-disponibilites-en-temps-reel/information/">https://opendata.paris.fr/explore/dataset/stations-velib-disponibilites-en-temps-reel/information/</a>): <code class="docutils literal notranslate"><span class="pre">data/paris_bike_stations_mercator.gpkg</span></code></p></li>
+</ul>
+<p>Both datasets are provided as  files.</p>
+<p>Let’s explore those datasets:</p>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<p>We will start with exploring the bicycle station dataset (available as a GeoPackage file: <code class="docutils literal notranslate"><span class="pre">data/paris_bike_stations_mercator.gpkg</span></code>)</p>
+<ul class="simple">
+<li><p>Read the stations datasets into a GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">stations</span></code>.</p></li>
+<li><p>Check the type of the returned object (with <code class="docutils literal notranslate"><span class="pre">type(..)</span></code>)</p></li>
+<li><p>Check the first rows of the dataframes. What kind of geometries dooes this datasets contain?</p></li>
+<li><p>How many features are there in the dataset? (hint: use the <code class="docutils literal notranslate"><span class="pre">.shape</span></code> attribute)</p></li>
+</ul>
+<details><summary>Hints</summary>
+<ul class="simple">
+<li><p>The geopandas.read_file() function can read different geospatial file formats. You pass the file name as first argument.</p></li>
+</ul>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data1.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data2.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data3.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data4.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<ul class="simple">
+<li><p>Make a quick plot of the <code class="docutils literal notranslate"><span class="pre">stations</span></code> dataset.</p></li>
+<li><p>Make the plot a bit larger byt setting the figure size to (12, 6) (hint: the <code class="docutils literal notranslate"><span class="pre">plot</span></code> method accepts a <code class="docutils literal notranslate"><span class="pre">figsize</span></code> keyword).</p></li>
+</ul>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data5.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A plot with just some points can be hard to interpret without any spatial context. Therefore, in the next exercise we will learn how to add a background map.</p>
+<p>We are going to make use of the <a class="reference external" href="https://github.com/darribas/contextily">contextily</a> package. The <code class="docutils literal notranslate"><span class="pre">add_basemap()</span></code> function of this package makes it easy to add a background web map to our plot. We begin by plotting our data first, and then pass the matplotlib axes object (returned by dataframe’s <code class="docutils literal notranslate"><span class="pre">plot()</span></code> method) to the <code class="docutils literal notranslate"><span class="pre">add_basemap()</span></code> function. <code class="docutils literal notranslate"><span class="pre">contextily</span></code> will then download the web tiles needed for the geographical extent of your plot.</p>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<ul class="simple">
+<li><p>Import <code class="docutils literal notranslate"><span class="pre">contextily</span></code>.</p></li>
+<li><p>Re-do the figure of the previous exercise: make a plot of all the points in <code class="docutils literal notranslate"><span class="pre">stations</span></code>, but assign the result to an <code class="docutils literal notranslate"><span class="pre">ax</span></code> variable.</p></li>
+<li><p>Set the marker size equal to 5 to reduce the size of the points (use the <code class="docutils literal notranslate"><span class="pre">markersize</span></code> keyword of the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> method for this).</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">add_basemap()</span></code> function of <code class="docutils literal notranslate"><span class="pre">contextily</span></code> to add a background map: the first argument is the matplotlib axes object <code class="docutils literal notranslate"><span class="pre">ax</span></code>.</p></li>
+</ul>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data6.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data7.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<ul class="simple">
+<li><p>Make a histogram showing the distribution of the number of bike stands in the stations.</p></li>
+</ul>
+<details>
+  <summary>Hints</summary>
+<ul class="simple">
+<li><p>Selecting a column can be done with the square brackets: <code class="docutils literal notranslate"><span class="pre">df['col_name']</span></code></p></li>
+<li><p>Single columns have a <code class="docutils literal notranslate"><span class="pre">hist()</span></code> method to plot a histogram of its values.</p></li>
+</ul>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data8.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<p>Let’s now visualize where the available bikes are actually stationed:</p>
+<ul class="simple">
+<li><p>Make a plot of the <code class="docutils literal notranslate"><span class="pre">stations</span></code> dataset (also with a (12, 6) figsize).</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">'available_bikes'</span></code> colums to determine the color of the points. For this, use the <code class="docutils literal notranslate"><span class="pre">column=</span></code> keyword.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">legend=True</span></code> keyword to show a color bar.</p></li>
+</ul>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data9.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<p>Next, we will explore the dataset on the administrative districts of Paris (available as a GeoJSON file: “data/paris_districts_utm.geojson”)</p>
+<ul class="simple">
+<li><p>Read the dataset into a GeoDataFrame called <code class="docutils literal notranslate"><span class="pre">districts</span></code>.</p></li>
+<li><p>Check the first rows of the dataframe. What kind of geometries does this dataset contain?</p></li>
+<li><p>How many features are there in the dataset? (hint: use the <code class="docutils literal notranslate"><span class="pre">.shape</span></code> attribute)</p></li>
+<li><p>Make a quick plot of the <code class="docutils literal notranslate"><span class="pre">districts</span></code> dataset (set the figure size to (12, 6)).</p></li>
+</ul>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data10.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data11.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data12.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data13.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<p>What are the largest districts (biggest area)?</p>
+<ul class="simple">
+<li><p>Calculate the area of each district.</p></li>
+<li><p>Add this area as a new column to the <code class="docutils literal notranslate"><span class="pre">districts</span></code> dataframe.</p></li>
+<li><p>Sort the dataframe by this area column for largest to smallest values (descending).</p></li>
+</ul>
+<details><summary>Hints</summary>
+<ul class="simple">
+<li><p>Adding a column can be done by assing values to a column using the same square brackets syntax: <code class="docutils literal notranslate"><span class="pre">df['new_col']</span> <span class="pre">=</span> <span class="pre">values</span></code></p></li>
+<li><p>To sort the rows of a DataFrame, use the <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code> method, specifying the colum to sort on with the <code class="docutils literal notranslate"><span class="pre">by='col_name'</span></code> keyword. Check the help of this method to see how to sort ascending or descending.</p></li>
+</ul>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data14.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data15.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data16.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE</strong>:</p>
+<ul class="simple">
+<li><p>Add a column <code class="docutils literal notranslate"><span class="pre">'population_density'</span></code> representing the number of inhabitants per squared kilometer (Note: The area is given in squared meter, so you will need to multiply the result with <code class="docutils literal notranslate"><span class="pre">10**6</span></code>).</p></li>
+<li><p>Plot the districts using the <code class="docutils literal notranslate"><span class="pre">'population_density'</span></code> to color the polygons. For this, use the <code class="docutils literal notranslate"><span class="pre">column=</span></code> keyword.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">legend=True</span></code> keyword to show a color bar.</p></li>
+</ul>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data17.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data18.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/01-introduction-geospatial-data19.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="for-the-curious-a-bit-more-on-importing-and-creating-geodataframes">
+<h2>For the curious: A bit more on importing and creating GeoDataFrames<a class="headerlink" href="#for-the-curious-a-bit-more-on-importing-and-creating-geodataframes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="note-on-fiona">
+<h3>Note on <code class="docutils literal notranslate"><span class="pre">fiona</span></code><a class="headerlink" href="#note-on-fiona" title="Permalink to this headline">¶</a></h3>
+<p>Under the hood, GeoPandas uses the <a class="reference external" href="http://toblerity.org/fiona/">Fiona library</a> (pythonic interface to GDAL/OGR) to read and write data. GeoPandas provides a more user-friendly wrapper, which is sufficient for most use cases. But sometimes you want more control, and in that case, to read a file with fiona you can do the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">shape</span>
+
+<span class="k">with</span> <span class="n">fiona</span><span class="o">.</span><span class="n">Env</span><span class="p">():</span>
+    <span class="k">with</span> <span class="n">fiona</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;zip://./data/ne_110m_admin_0_countries.zip&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">collection</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">:</span>
+            <span class="c1"># ... do something with geometry</span>
+            <span class="n">geom</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">])</span>
+            <span class="c1"># ... do something with properties</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s1">&#39;properties&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="constructing-a-geodataframe-manually">
+<h3>Constructing a GeoDataFrame manually<a class="headerlink" href="#constructing-a-geodataframe-manually" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)],</span>
+    <span class="s1">&#39;attribute1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="s1">&#39;attribute2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="creating-a-geodataframe-from-an-existing-dataframe">
+<h3>Creating a GeoDataFrame from an existing dataframe<a class="headerlink" href="#creating-a-geodataframe-from-an-existing-dataframe" title="Permalink to this headline">¶</a></h3>
+<p>For example, if you have lat/lon coordinates in two columns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span><span class="s1">&#39;City&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Buenos Aires&#39;</span><span class="p">,</span> <span class="s1">&#39;Brasilia&#39;</span><span class="p">,</span> <span class="s1">&#39;Santiago&#39;</span><span class="p">,</span> <span class="s1">&#39;Bogota&#39;</span><span class="p">,</span> <span class="s1">&#39;Caracas&#39;</span><span class="p">],</span>
+     <span class="s1">&#39;Country&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Brazil&#39;</span><span class="p">,</span> <span class="s1">&#39;Chile&#39;</span><span class="p">,</span> <span class="s1">&#39;Colombia&#39;</span><span class="p">,</span> <span class="s1">&#39;Venezuela&#39;</span><span class="p">],</span>
+     <span class="s1">&#39;Latitude&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">34.58</span><span class="p">,</span> <span class="o">-</span><span class="mf">15.78</span><span class="p">,</span> <span class="o">-</span><span class="mf">33.45</span><span class="p">,</span> <span class="mf">4.60</span><span class="p">,</span> <span class="mf">10.48</span><span class="p">],</span>
+     <span class="s1">&#39;Longitude&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">58.66</span><span class="p">,</span> <span class="o">-</span><span class="mf">47.91</span><span class="p">,</span> <span class="o">-</span><span class="mf">70.66</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.08</span><span class="p">,</span> <span class="o">-</span><span class="mf">66.86</span><span class="p">]})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geopandas</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">Longitude</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Latitude</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gdf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>See <a class="reference external" href="http://geopandas.readthedocs.io/en/latest/gallery/create_geopandas_from_pandas.html">http://geopandas.readthedocs.io/en/latest/gallery/create_geopandas_from_pandas.html</a> for full example</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/health-gis",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

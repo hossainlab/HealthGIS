@@ -1,0 +1,778 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Case study - Conflict mapping: mining sites in eastern DR Congo &#8212; HealthGIS with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpeg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">HealthGIS with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/case-conflict-mapping.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/health-gis/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/health-gis/master?urlpath=tree/book/notebooks/case-conflict-mapping.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/health-gis/blob/master/book/notebooks/case-conflict-mapping.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#importing-and-exploring-the-data">
+   1. Importing and exploring the data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-mining-site-visit-data">
+     The mining site visit data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-on-protected-areas-in-the-same-region">
+     Data on protected areas in the same region
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conversion-to-a-common-coordinate-reference-system">
+     Conversion to a common Coordinate Reference System
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-advanced-visualizations">
+     More advanced visualizations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spatial-operations">
+   2. Spatial operations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-spatial-join-to-determine-mining-sites-in-the-protected-areas">
+   3. Using spatial join to determine mining sites in the protected areas
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mining-sites-in-protected-areas">
+     Mining sites in protected areas
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mining-sites-in-the-borders-of-protected-areas">
+     Mining sites in the borders of protected areas
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="case-study-conflict-mapping-mining-sites-in-eastern-dr-congo">
+<h1>Case study - Conflict mapping: mining sites in eastern DR Congo<a class="headerlink" href="#case-study-conflict-mapping-mining-sites-in-eastern-dr-congo" title="Permalink to this headline">¶</a></h1>
+<p>In this case study, we will explore a dataset on artisanal mining sites located in eastern DR Congo.</p>
+<p><strong>Note</strong>: this tutorial is meant as a hands-on session, and most code examples are provided as exercises to be filled in. I highly recommend actually trying to do this yourself, but if you want to follow the solved tutorial, you can find this in the <code class="docutils literal notranslate"><span class="pre">_solved</span></code> directory.</p>
+<hr class="docutils" />
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://ipisresearch.be/">IPIS</a>, the International Peace Information Service, manages a database on mining site visits in eastern DR Congo: <a class="reference external" href="http://ipisresearch.be/home/conflict-mapping/maps/open-data/">http://ipisresearch.be/home/conflict-mapping/maps/open-data/</a></p>
+<p>Since  2009, IPIS has visited artisanal mining sites in the region during various data collection campaigns. As part of these campaigns, surveyor teams visit mining sites in the field, meet with miners and complete predefined questionnaires. These contain questions about the mining site, the minerals mined at the site and the armed groups possibly present at the site.</p>
+<p>Some additional links:</p>
+<ul class="simple">
+<li><p>Tutorial on the same data using R from IPIS (but without geospatial aspect): <a class="reference external" href="http://ipisresearch.be/home/conflict-mapping/maps/open-data/open-data-tutorial/">http://ipisresearch.be/home/conflict-mapping/maps/open-data/open-data-tutorial/</a></p></li>
+<li><p>Interactive web app using the same data: <a class="reference external" href="http://www.ipisresearch.be/mapping/webmapping/drcongo/v5/">http://www.ipisresearch.be/mapping/webmapping/drcongo/v5/</a></p></li>
+</ul>
+</div>
+<div class="section" id="importing-and-exploring-the-data">
+<h2>1. Importing and exploring the data<a class="headerlink" href="#importing-and-exploring-the-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-mining-site-visit-data">
+<h3>The mining site visit data<a class="headerlink" href="#the-mining-site-visit-data" title="Permalink to this headline">¶</a></h3>
+<p>IPIS provides a WFS server to access the data. We can send a query to this server to download the data, and load the result into a geopandas GeoDataFrame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">wfs_url</span> <span class="o">=</span> <span class="s2">&quot;http://geo.ipisresearch.be/geoserver/public/ows&quot;</span>
+<span class="n">params</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="s1">&#39;WFS&#39;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span> <span class="n">request</span><span class="o">=</span><span class="s1">&#39;GetFeature&#39;</span><span class="p">,</span>
+              <span class="n">typeName</span><span class="o">=</span><span class="s1">&#39;public:cod_mines_curated_all_opendata_p_ipis&#39;</span><span class="p">,</span> <span class="n">outputFormat</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">)</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">wfs_url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+<span class="n">data_features</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">))</span>
+<span class="n">data_visits</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">(</span><span class="n">data_features</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, the data is also provided in the tutorial materials as a GeoJSON file, so it is certainly available during the tutorial.</p>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Read the GeoJSON file `data/cod_mines_curated_all_opendata_p_ipis.geojson` using geopandas, and call the result `data_visits`.</li>
+  <li>Inspect the first 5 rows, and check the number of observations</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping3.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping4.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping5.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The provided dataset contains a lot of information, much more than we are going to use in this tutorial. Therefore, we will select a subset of the column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_visits</span> <span class="o">=</span> <span class="n">data_visits</span><span class="p">[[</span><span class="s1">&#39;vid&#39;</span><span class="p">,</span> <span class="s1">&#39;project&#39;</span><span class="p">,</span> <span class="s1">&#39;visit_date&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;pcode&#39;</span><span class="p">,</span> <span class="s1">&#39;workers_numb&#39;</span><span class="p">,</span> <span class="s1">&#39;interference&#39;</span><span class="p">,</span> <span class="s1">&#39;armed_group1&#39;</span><span class="p">,</span> <span class="s1">&#39;mineral1&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_visits</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Before starting the actual geospatial tutorial, we will use some more advanced pandas queries to construct a subset of the data that we will use further on:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take only the data of visits by IPIS</span>
+<span class="n">data_ipis</span> <span class="o">=</span> <span class="n">data_visits</span><span class="p">[</span><span class="n">data_visits</span><span class="p">[</span><span class="s1">&#39;project&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s1">&#39;IPIS&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data_visits</span><span class="p">[</span><span class="s1">&#39;workers_numb&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For those mining sites that were visited multiple times, take only the last visit</span>
+<span class="n">data_ipis_lastvisit</span> <span class="o">=</span> <span class="n">data_ipis</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;visit_date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;pcode&#39;</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">last</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">data_ipis_lastvisit</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">data_visits</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-on-protected-areas-in-the-same-region">
+<h3>Data on protected areas in the same region<a class="headerlink" href="#data-on-protected-areas-in-the-same-region" title="Permalink to this headline">¶</a></h3>
+<p>Next to the mining site data, we are also going to use a dataset on protected areas (national parks) in Congo. This dataset was downloaded from <a class="reference external" href="http://www.wri.org/our-work/project/congo-basin-forests/democratic-republic-congo#project-tabs">http://www.wri.org/our-work/project/congo-basin-forests/democratic-republic-congo#project-tabs</a> and included in the tutorial repository: <code class="docutils literal notranslate"><span class="pre">data/cod_conservation.zip</span></code>.</p>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Extract the `data/cod_conservation.zip` archive, and read the shapefile contained in it. Assign the resulting GeoDataFrame to a variable named `protected_areas`.</li>
+  <li>Quickly plot the GeoDataFrame.</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping10.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping11.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="conversion-to-a-common-coordinate-reference-system">
+<h3>Conversion to a common Coordinate Reference System<a class="headerlink" href="#conversion-to-a-common-coordinate-reference-system" title="Permalink to this headline">¶</a></h3>
+<p>We will see that both datasets use a different Coordinate Reference System (CRS). For many operations, however, it is important that we use a consistent CRS, and therefore we will convert both to a commong CRS.</p>
+<p>But first, we explore problems we can encounter related to CRSs.</p>
+<hr class="docutils" />
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Goma">Goma</a> is the capital city of North Kivu province of Congo, close to the border with Rwanda. It’s coordinates are 1.66°S 29.22°E.</p>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Create a single Point object representing the location of Goma. Call this `goma`.</li>
+  <li>Calculate the distances of all mines to Goma, and show the 5 smallest distances (mines closest to Goma).</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping12.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping13.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping14.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping15.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The distances we see here in degrees, which is not helpful for interpreting those distances. That is a reason we will convert the data to another coordinate reference system (CRS) for the remainder of this tutorial.</p>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Make a visualization of the national parks and the mining sites on a single plot.</li>
+ </ul> 
+<p>Check the first section of the [04-more-on-visualization.ipynb](04-more-on-visualization.ipynb) notebook for tips and tricks to plot with GeoPandas.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping16.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You will notice that the protected areas and mining sites do not map to the same area on the plot. This is because the Coordinate Reference Systems (CRS) differ for both datasets. Another reason we will need to convert the CRS!</p>
+<p>Let’s check the Coordinate Reference System (CRS) for both datasets.</p>
+<p>The mining sites data uses the <a class="reference external" href="http://spatialreference.org/ref/epsg/4326/">WGS 84 lat/lon (EPSG 4326)</a> CRS:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The protected areas dataset, on the other hand, uses a <a class="reference external" href="http://spatialreference.org/ref/epsg/wgs-84-world-mercator/">WGS 84 / World Mercator (EPSG 3395)</a> projection (with meters as unit):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">protected_areas</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will convert both datasets to a local UTM zone, so we can plot them together and that distance-based calculations give sensible results.</p>
+<p>To find the appropriate UTM zone, you can check <a class="reference external" href="http://www.dmap.co.uk/utmworld.htm">http://www.dmap.co.uk/utmworld.htm</a> or <a class="reference external" href="https://www.latlong.net/lat-long-utm.html">https://www.latlong.net/lat-long-utm.html</a>, and in this case we will use UTM zone 35, which gives use EPSG 32735: <a class="reference external" href="https://epsg.io/32735">https://epsg.io/32735</a></p>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Convert both datasets (`data` and `protected_areas`) to EPSG 32735. Name the results `data_utm` and `protected_areas_utm`.</li>
+  <li>Try again to visualize both datasets on a single map.</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping19.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping20.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="more-advanced-visualizations">
+<h3>More advanced visualizations<a class="headerlink" href="#more-advanced-visualizations" title="Permalink to this headline">¶</a></h3>
+<p>For the following exercises, check the first section of the [04-more-on-visualization.ipynb](04-more-on-visualization.ipynb) notebook for tips and tricks to plot with GeoPandas.</p><div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Make a visualization of the national parks and the mining sites on a single plot.</li>
+  <li>Pay attention to the following details:
+     <ul>
+      <li>Make the figure a bit bigger.</li>
+      <li>The protected areas should be plotted in green</li>
+      <li>For plotting the mining sites, adjust the markersize and use an `alpha=0.5`.</li>
+      <li>Remove the figure border and x and y labels (coordinates)</li>
+     </ul> 
+   </li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping21.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping22.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+<p>In addition to the previous figure:</p>
+ <ul>
+  <li>Give the mining sites a distinct color based on the `'interference'` column, indicating whether an armed group is present at the mining site or not.</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping23.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+<p>In addition to the previous figure:</p>
+ <ul>
+  <li>Give the mining sites a distinct color based on the `'mineral1'` column, indicating which mineral is the primary mined mineral.</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping24.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="spatial-operations">
+<h2>2. Spatial operations<a class="headerlink" href="#spatial-operations" title="Permalink to this headline">¶</a></h2>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Access the geometry of the "Kahuzi-Biega National park".</li>
+  <li>Filter the mining sites to select those that are located in this national park.</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping25.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping26.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping27.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+ <b>EXERCISE</b>: Determine for each mining site the "closest" protected area:
+ <ul>
+  <li> PART 1 - do this for a single mining site:
+   <ul>
+    <li>Get a single mining site, e.g. the first of the dataset.</li>
+    <li>Calculate the distance (in km's) to all protected areas for this mining site</li>
+    <li>Get the index of the minimum distance (tip: `idxmin()`) and get the name of the protected are corresponding to this index.</li>
+   </ul> 
+  </li>
+  <li> PART 2 - apply this procedure on each geometry:
+   <ul>
+    <li>Write the above procedure as a function that gets a single site and the protected areas dataframe as input and returns the name of the closest protected area as output.</li>
+    <li>Apply this function to all sites using the `.apply()` method on `data_utm.geometry`.</li>
+   </ul> 
+  </li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping28.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping29.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping30.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping31.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping32.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-spatial-join-to-determine-mining-sites-in-the-protected-areas">
+<h2>3. Using spatial join to determine mining sites in the protected areas<a class="headerlink" href="#using-spatial-join-to-determine-mining-sites-in-the-protected-areas" title="Permalink to this headline">¶</a></h2>
+<p>Based on the analysis and visualizations above, we can already see that there are mining sites inside the protected areas. Let’s now do an actual spatial join to determine which sites are within the protected areas.</p>
+<div class="section" id="mining-sites-in-protected-areas">
+<h3>Mining sites in protected areas<a class="headerlink" href="#mining-sites-in-protected-areas" title="Permalink to this headline">¶</a></h3>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Add information about the protected areas to the mining sites dataset, using a spatial join:
+   <ul>
+    <li>Call the result `data_within_protected`</li>
+    <li>If the result is empty, this is an indication that the coordinate reference system is not matching. Make sure to re-project the data (see above).</li>
+   </ul>
+  </li>
+  <li>How many mining sites are located within a national park?</li>
+  <li>Count the number of mining sites per national park (pandas tip: check `value_counts()`)</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping33.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping34.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping35.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping36.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mining-sites-in-the-borders-of-protected-areas">
+<h3>Mining sites in the borders of protected areas<a class="headerlink" href="#mining-sites-in-the-borders-of-protected-areas" title="Permalink to this headline">¶</a></h3>
+<p>And what about the borders of the protected areas? (just outside the park)</p>
+<div class="alert alert-success">
+ <b>EXERCISE</b>:
+ <ul>
+  <li>Create a new dataset, `protected_areas_borders`, that contains the border area (10 km wide) of each protected area:
+   <ul>
+    <li>Tip: one way of doing this is with the `buffer` and `difference` function.</li>
+    <li>Plot the resulting borders as a visual check of correctness.</li>
+   </ul>
+  </li>
+  <li>Count the number of mining sites per national park that are located within its borders</li>
+ </ul> 
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping37.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping38.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping39.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping40.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/case-conflict-mapping41.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/health-gis",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

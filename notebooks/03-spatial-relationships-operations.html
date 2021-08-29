@@ -1,0 +1,952 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spatial relationships and operations &#8212; HealthGIS with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpeg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">HealthGIS with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/notebooks/03-spatial-relationships-operations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/health-gis/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/health-gis/master?urlpath=tree/book/notebooks/03-spatial-relationships-operations.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/health-gis/blob/master/book/notebooks/03-spatial-relationships-operations.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spatial-relationships">
+   Spatial relationships
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#relationships-between-individual-objects">
+     Relationships between individual objects
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spatial-relationships-with-geodataframes">
+     Spatial relationships with GeoDataFrames
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-practice">
+   Let’s practice!
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spatial-operations">
+   Spatial operations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Let’s practice!
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="spatial-relationships-and-operations">
+<h1>Spatial relationships and operations<a class="headerlink" href="#spatial-relationships-and-operations" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./data/ne_110m_admin_0_countries.zip&quot;</span><span class="p">)</span>
+<span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./data/ne_110m_populated_places.zip&quot;</span><span class="p">)</span>
+<span class="n">rivers</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./data/ne_50m_rivers_lake_centerlines.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="spatial-relationships">
+<h2>Spatial relationships<a class="headerlink" href="#spatial-relationships" title="Permalink to this headline">¶</a></h2>
+<p>An important aspect of geospatial data is that we can look at <em>spatial relationships</em>: how two spatial objects relate to each other (whether they overlap, intersect, contain, .. one another).</p>
+<p>The topological, set-theoretic relationships in GIS are typically based on the DE-9IM model. See <a class="reference external" href="https://en.wikipedia.org/wiki/Spatial_relation">https://en.wikipedia.org/wiki/Spatial_relation</a> for more information.</p>
+<p><img alt="" src="../_images/TopologicSpatialRelarions2.png" />
+(Image by <a class="reference external" href="https://en.wikipedia.org/wiki/Spatial_relation#/media/File:TopologicSpatialRelarions2.png">Krauss, CC BY-SA 3.0</a>)</p>
+<div class="section" id="relationships-between-individual-objects">
+<h3>Relationships between individual objects<a class="headerlink" href="#relationships-between-individual-objects" title="Permalink to this headline">¶</a></h3>
+<p>Let’s first create some small toy spatial objects:</p>
+<p>A polygon <small>(note: we use <code class="docutils literal notranslate"><span class="pre">.squeeze()</span></code> here to to extract the scalar geometry object from the GeoSeries of length 1)</small>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">belgium</span> <span class="o">=</span> <span class="n">countries</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">countries</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Belgium&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Two points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paris</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cities</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Paris&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+<span class="n">brussels</span> <span class="o">=</span> <span class="n">cities</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cities</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Brussels&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And a linestring:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">LineString</span>
+<span class="n">line</span> <span class="o">=</span> <span class="n">LineString</span><span class="p">([</span><span class="n">paris</span><span class="p">,</span> <span class="n">brussels</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s visualize those 4 geometry objects together (I only put them in a GeoSeries to easily display them together with the geopandas <code class="docutils literal notranslate"><span class="pre">.plot()</span></code> method):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">belgium</span><span class="p">,</span> <span class="n">paris</span><span class="p">,</span> <span class="n">brussels</span><span class="p">,</span> <span class="n">line</span><span class="p">])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;tab10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../_images/03-spatial-relationships-operations_12_1.png" src="../_images/03-spatial-relationships-operations_12_1.png" />
+</div>
+</div>
+<p>You can recognize the abstract shape of Belgium.</p>
+<p>Brussels, the capital of Belgium, is thus located within Belgium. This is a spatial relationship, and we can test this using the individual shapely geometry objects as follow:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brussels</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">belgium</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>And using the reverse, Belgium contains Brussels:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">belgium</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">brussels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>On the other hand, Paris is not located in Belgium:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">belgium</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">paris</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">paris</span><span class="o">.</span><span class="n">within</span><span class="p">(</span><span class="n">belgium</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>The straight line we draw from Paris to Brussels is not fully located within Belgium, but it does intersect with it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">belgium</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">line</span><span class="o">.</span><span class="n">intersects</span><span class="p">(</span><span class="n">belgium</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="spatial-relationships-with-geodataframes">
+<h3>Spatial relationships with GeoDataFrames<a class="headerlink" href="#spatial-relationships-with-geodataframes" title="Permalink to this headline">¶</a></h3>
+<p>The same methods that are available on individual <code class="docutils literal notranslate"><span class="pre">shapely</span></code> geometries as we have seen above, are also available as methods on <code class="docutils literal notranslate"><span class="pre">GeoSeries</span></code> / <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> objects.</p>
+<p>For example, if we call the <code class="docutils literal notranslate"><span class="pre">contains</span></code> method on the world dataset with the <code class="docutils literal notranslate"><span class="pre">paris</span></code> point, it will do this spatial check for each country in the <code class="docutils literal notranslate"><span class="pre">world</span></code> dataframe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">paris</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      False
+1      False
+2      False
+3      False
+4      False
+       ...  
+172    False
+173    False
+174    False
+175    False
+176    False
+Length: 177, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because the above gives us a boolean result, we can use that to filter the dataframe:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">paris</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_a3</th>
+      <th>name</th>
+      <th>continent</th>
+      <th>pop_est</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>55</th>
+      <td>FRA</td>
+      <td>France</td>
+      <td>Europe</td>
+      <td>67106161.0</td>
+      <td>2699000.0</td>
+      <td>MULTIPOLYGON (((2.51357 51.14851, 2.65842 50.7...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And indeed, France is the only country in the world in which Paris is located.</p>
+<p>Another example, extracting the linestring of the Amazon river in South America, we can query through which countries the river flows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">amazon</span> <span class="o">=</span> <span class="n">rivers</span><span class="p">[</span><span class="n">rivers</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Amazonas&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="o">.</span><span class="n">crosses</span><span class="p">(</span><span class="n">amazon</span><span class="p">)]</span>  <span class="c1"># or .intersects</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_a3</th>
+      <th>name</th>
+      <th>continent</th>
+      <th>pop_est</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>22</th>
+      <td>BRA</td>
+      <td>Brazil</td>
+      <td>South America</td>
+      <td>207353391.0</td>
+      <td>3081000.0</td>
+      <td>POLYGON ((-57.62513 -30.21629, -56.29090 -28.8...</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>COL</td>
+      <td>Colombia</td>
+      <td>South America</td>
+      <td>47698524.0</td>
+      <td>688000.0</td>
+      <td>POLYGON ((-66.87633 1.25336, -67.06505 1.13011...</td>
+    </tr>
+    <tr>
+      <th>124</th>
+      <td>PER</td>
+      <td>Peru</td>
+      <td>South America</td>
+      <td>31036656.0</td>
+      <td>410400.0</td>
+      <td>POLYGON ((-69.52968 -10.95173, -68.66508 -12.5...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="alert alert-info" style="font-size:120%">
+<p><strong>REFERENCE</strong>:</p>
+<p>Overview of the different functions to check spatial relationships (<em>spatial predicate functions</em>):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">equals</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contains</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">crosses</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">disjoint</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">intersects</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">overlaps</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">touches</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">within</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">covers</span></code></p></li>
+</ul>
+<p>See <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#predicates-and-relationships">https://shapely.readthedocs.io/en/stable/manual.html#predicates-and-relationships</a> for an overview of those methods.</p>
+<p>See <a class="reference external" href="https://en.wikipedia.org/wiki/DE-9IM">https://en.wikipedia.org/wiki/DE-9IM</a> for all details on the semantics of those operations.</p>
+</div></div>
+</div>
+<div class="section" id="let-s-practice">
+<h2>Let’s practice!<a class="headerlink" href="#let-s-practice" title="Permalink to this headline">¶</a></h2>
+<p>We will again use the Paris datasets to do some exercises. Let’s start importing them again:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;data/paris_districts.geojson&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">2154</span><span class="p">)</span>
+<span class="n">stations</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;data/paris_bike_stations.geojson&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">2154</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE: The Eiffel Tower</strong></p>
+<p>The Eiffel Tower is an iron lattice tower built in the 19th century, and is probably the most iconic view of Paris.</p>
+<p>The location of the Eiffel Tower is: x of 648237.3 and y of 6862271.9.</p>
+<ul class="simple">
+<li><p>Create a Shapely point object with the coordinates of the Eiffel Tower and assign it to a variable called <code class="docutils literal notranslate"><span class="pre">eiffel_tower</span></code>. Print the result.</p></li>
+<li><p>Check if the Eiffel Tower is located within the Montparnasse district (provided).</p></li>
+<li><p>Check if the Montparnasse district contains the bike station location.</p></li>
+<li><p>Calculate the distance between the Eiffel Tower and the bike station (note: in this case, the distance is returned in meters).</p></li>
+</ul>
+<details><summary>Hints</summary>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Point</span></code> class is available in the <code class="docutils literal notranslate"><span class="pre">shapely.geometry</span></code> submodule</p></li>
+<li><p>Creating a point can be done by passing the x and y coordinates to the <code class="docutils literal notranslate"><span class="pre">Point()</span></code> constructor.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">within()</span></code> method checks if the object is located within the passed geometry (used as <code class="docutils literal notranslate"><span class="pre">geometry1.within(geometry2)</span></code>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">contains()</span></code> method checks if the object contains the passed geometry (used as <code class="docutils literal notranslate"><span class="pre">geometry1.contains(geometry2)</span></code>).</p></li>
+<li><p>To calculate the distance between two geometries, the <code class="docutils literal notranslate"><span class="pre">distance()</span></code> method of one of the geometries can be used.</p></li>
+</ul>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Point geometry</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations1.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations2.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Accessing the Montparnasse geometry (Polygon)</span>
+<span class="n">district_montparnasse</span> <span class="o">=</span> <span class="n">districts</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">52</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+<span class="n">bike_station</span> <span class="o">=</span> <span class="n">stations</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">293</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations3.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations4.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations5.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE: In which district in the Eiffel Tower located?</strong></p>
+<p>In previous exercise, we constructed a <code class="docutils literal notranslate"><span class="pre">Point</span></code> geometry for its location, and we checked that it was not located in the Montparnasse district. Let’s now determine in which of the districts of Paris it <em>is</em> located.</p>
+<ul class="simple">
+<li><p>Create a boolean mask (or filter) indicating whether each district contains the Eiffel Tower or not. Call the result <code class="docutils literal notranslate"><span class="pre">mask</span></code>.</p></li>
+<li><p>Filter the <code class="docutils literal notranslate"><span class="pre">districts</span></code> dataframe with the boolean mask and print the result.</p></li>
+</ul>
+<details><summary>Hints</summary>
+<ul class="simple">
+<li><p>To check for each polygon in the districts dataset if it contains a single point, we can use the <code class="docutils literal notranslate"><span class="pre">contains()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">districts</span></code> GeoDataFrame.</p></li>
+<li><p>Filtering the rows of a DataFrame based on a condition can be done by passing the boolean mask into <code class="docutils literal notranslate"><span class="pre">df[..]</span></code>.</p></li>
+</ul>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct a point object for the Eiffel Tower</span>
+<span class="n">eiffel_tower</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mf">648237.3</span><span class="p">,</span> <span class="mf">6862271.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations6.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations7.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-success">
+<p><strong>EXERCISE: How far is the closest bike station?</strong></p>
+<p>Now, we might be interested in the bike stations nearby the Eiffel Tower. To explore them, let’s visualize the Eiffel Tower itself as well as the bikes stations within 1km.</p>
+<p>To do this, we can calculate the distance to the Eiffel Tower for each of the stations. Based on this result, we can then create a mask that takes <code class="docutils literal notranslate"><span class="pre">True</span></code> if the station is within 1km, and <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise, and use it to filter the stations GeoDataFrame. Finally, we make a visualization of this subset.</p>
+<ul class="simple">
+<li><p>Calculate the distance to the Eiffel Tower for each station, and call the result <code class="docutils literal notranslate"><span class="pre">dist_eiffel</span></code>.</p></li>
+<li><p>Print the distance to the closest station (which is the minimum of <code class="docutils literal notranslate"><span class="pre">dist_eiffel</span></code>).</p></li>
+<li><p>Select the rows the <code class="docutils literal notranslate"><span class="pre">stations</span></code> GeoDataFrame where the distance to the Eiffel Tower is less than 1 km (note that the distance is in meters). Call the result <code class="docutils literal notranslate"><span class="pre">stations_eiffel</span></code>.</p></li>
+</ul>
+<details><summary>Hints</summary>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">distance()</span></code> method of a GeoDataFrame works element-wise: it calculates the distance between each geometry in the GeoDataFrame and the geometry passed to the method.</p></li>
+<li><p>A Series has a <code class="docutils literal notranslate"><span class="pre">min()</span></code> method to calculate the minimum value.</p></li>
+<li><p>To create a boolean mask based on a condition, we can do e.g. <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">&lt;</span> <span class="pre">100</span></code>.</p></li>
+</ul>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations8.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations9.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations10.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a plot of the close-by restaurants</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">stations_eiffel</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">eiffel_tower</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:2154&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">contextily</span>
+<span class="n">contextily</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_axis_off</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="spatial-operations">
+<h2>Spatial operations<a class="headerlink" href="#spatial-operations" title="Permalink to this headline">¶</a></h2>
+<p>Next to the spatial predicates that return boolean values, Shapely and GeoPandas also provide operations that return new geometric objects.</p>
+<p><strong>Binary operations:</strong></p>
+<table><tr>
+<td> <img src="../img/spatial-operations-base.png"/> </td>
+<td> <img src="../img/spatial-operations-intersection.png"/> </td>
+</tr>
+<tr>
+<td> <img src="../img/spatial-operations-union.png"/> </td>
+<td> <img src="../img/spatial-operations-difference.png"/> </td>
+</tr></table>
+<p><strong>Buffer:</strong></p>
+<table><tr>
+<td> <img src="../img/spatial-operations-buffer-point1.png"/> </td>
+<td> <img src="../img/spatial-operations-buffer-point2.png"/> </td>
+</tr>
+<tr>
+<td> <img src="../img/spatial-operations-buffer-line.png"/> </td>
+<td> <img src="../img/spatial-operations-buffer-polygon.png"/> </td>
+</tr></table>
+<p>See <a class="reference external" href="https://shapely.readthedocs.io/en/stable/manual.html#spatial-analysis-methods">https://shapely.readthedocs.io/en/stable/manual.html#spatial-analysis-methods</a> for more details.</p>
+<p>For example, using the toy data from above, let’s construct a buffer around Brussels (which returns a Polygon):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geopandas</span><span class="o">.</span><span class="n">GeoSeries</span><span class="p">([</span><span class="n">belgium</span><span class="p">,</span> <span class="n">brussels</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">1</span><span class="p">)])</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;tab10&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>and now take the intersection, union or difference of those two polygons:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brussels</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">belgium</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brussels</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">belgium</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">brussels</span><span class="o">.</span><span class="n">buffer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">belgium</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another useful method is the <code class="docutils literal notranslate"><span class="pre">unary_union</span></code> attribute, which converts the set of geometry objects in a GeoDataFrame into a single geometry object by taking the union of all those geometries.</p>
+<p>For example, we can construct a single object for the Africa continent:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">africa_countries</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="n">countries</span><span class="p">[</span><span class="s1">&#39;continent&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Africa&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">africa</span> <span class="o">=</span> <span class="n">africa_countries</span><span class="o">.</span><span class="n">unary_union</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">africa</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">africa</span><span class="p">)[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" style="font-size:120%">
+<p><strong>REMEMBER</strong>:</p>
+<p>GeoPandas (and Shapely for the individual objects) provides a whole lot of basic methods to analyse the geospatial data (distance, length, centroid, boundary, convex_hull, simplify, transform, ….), much more than the few that we can touch in this tutorial.</p>
+<ul class="simple">
+<li><p>An overview of all methods provided by GeoPandas can be found here: <a class="reference external" href="http://geopandas.readthedocs.io/en/latest/reference.html">http://geopandas.readthedocs.io/en/latest/reference.html</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id1">
+<h2>Let’s practice!<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="alert alert-success">
+ <b>EXERCISE: What are the districts close to the Seine?</b>
+ <p>
+ Below, the coordinates for the Seine river in the neighbourhood of Paris are provided as a GeoJSON-like feature dictionary (created at http://geojson.io). 
+ </p>
+  <p>
+ Based on this `seine` object, we want to know which districts are located close (maximum 150 m) to the Seine. 
+ </p>
+ <p>
+ <ul>
+  <li>Create a buffer of 150 m around the Seine.</li>
+  <li>Check which districts intersect with this buffered object.</li>
+  <li>Make a visualization of the districts indicating which districts are located close to the Seine.</li>
+ </ul> 
+ </p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;data/paris_districts.geojson&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">2154</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># created a line with http://geojson.io</span>
+<span class="n">s_seine</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="o">.</span><span class="n">from_features</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;FeatureCollection&quot;</span><span class="p">,</span><span class="s2">&quot;features&quot;</span><span class="p">:[{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;Feature&quot;</span><span class="p">,</span><span class="s2">&quot;properties&quot;</span><span class="p">:{},</span><span class="s2">&quot;geometry&quot;</span><span class="p">:{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;LineString&quot;</span><span class="p">,</span><span class="s2">&quot;coordinates&quot;</span><span class="p">:[[</span><span class="mf">2.408924102783203</span><span class="p">,</span><span class="mf">48.805619828930226</span><span class="p">],[</span><span class="mf">2.4092674255371094</span><span class="p">,</span><span class="mf">48.81703747481909</span><span class="p">],[</span><span class="mf">2.3927879333496094</span><span class="p">,</span><span class="mf">48.82325391133874</span><span class="p">],[</span><span class="mf">2.360687255859375</span><span class="p">,</span><span class="mf">48.84912860497674</span><span class="p">],[</span><span class="mf">2.338714599609375</span><span class="p">,</span><span class="mf">48.85827758964043</span><span class="p">],[</span><span class="mf">2.318115234375</span><span class="p">,</span><span class="mf">48.8641501307046</span><span class="p">],[</span><span class="mf">2.298717498779297</span><span class="p">,</span><span class="mf">48.863246707697</span><span class="p">],[</span><span class="mf">2.2913360595703125</span><span class="p">,</span><span class="mf">48.859519915404825</span><span class="p">],[</span><span class="mf">2.2594070434570312</span><span class="p">,</span><span class="mf">48.8311646245967</span><span class="p">],[</span><span class="mf">2.2436141967773438</span><span class="p">,</span><span class="mf">48.82325391133874</span><span class="p">],[</span><span class="mf">2.236919403076172</span><span class="p">,</span><span class="mf">48.82347994904826</span><span class="p">],[</span><span class="mf">2.227306365966797</span><span class="p">,</span><span class="mf">48.828339513221444</span><span class="p">],[</span><span class="mf">2.2224998474121094</span><span class="p">,</span><span class="mf">48.83862215329593</span><span class="p">],[</span><span class="mf">2.2254180908203125</span><span class="p">,</span><span class="mf">48.84856379804802</span><span class="p">],[</span><span class="mf">2.2240447998046875</span><span class="p">,</span><span class="mf">48.85409863123821</span><span class="p">],[</span><span class="mf">2.230224609375</span><span class="p">,</span><span class="mf">48.867989496547864</span><span class="p">],[</span><span class="mf">2.260265350341797</span><span class="p">,</span><span class="mf">48.89192242750887</span><span class="p">],[</span><span class="mf">2.300262451171875</span><span class="p">,</span><span class="mf">48.910203080780285</span><span class="p">]]}}]},</span>
+                                               <span class="n">crs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># convert to local UTM zone</span>
+<span class="n">s_seine_utm</span> <span class="o">=</span> <span class="n">s_seine</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">2154</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">districts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">s_seine_utm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># access the single geometry object</span>
+<span class="n">seine</span> <span class="o">=</span> <span class="n">s_seine_utm</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations11.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations12.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations13.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># %load _solved/solutions/03-spatial-relationships-operations14.py</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/health-gis",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

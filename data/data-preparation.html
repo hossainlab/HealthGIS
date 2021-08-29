@@ -1,0 +1,1580 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data preparation for tutorial &#8212; HealthGIS with Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.e8f53015daec13862f6db5e763c41738.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/logo.jpeg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.jpeg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">HealthGIS with Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/data/data-preparation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/hossainlab/health-gis/"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/health-gis/master?urlpath=tree/book/data/data-preparation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/health-gis/blob/master/book/data/data-preparation.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#countries-dataset">
+   Countries dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#natural-earth-cities-dataset">
+   Natural Earth - Cities dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#natural-earth-rivers-dataset">
+   Natural Earth - Rivers dataset
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#paris-districts">
+   Paris districts
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#commerces-de-paris">
+   Commerces de Paris
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="data-preparation-for-tutorial">
+<h1>Data preparation for tutorial<a class="headerlink" href="#data-preparation-for-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This notebook contains the code to convert raw downloaded external data into a cleaned or simplified version for tutorial purposes.</p>
+<p>The raw data is expected to be in the <code class="docutils literal notranslate"><span class="pre">./raw</span></code> sub-directory (not included in the git repo).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">geopandas</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="countries-dataset">
+<h2>Countries dataset<a class="headerlink" href="#countries-dataset" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/">http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-admin-0-countries/</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./raw/original_data_ne/ne_110m_admin_0_countries.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scalerank</th>
+      <th>featurecla</th>
+      <th>LABELRANK</th>
+      <th>SOVEREIGNT</th>
+      <th>SOV_A3</th>
+      <th>ADM0_DIF</th>
+      <th>LEVEL</th>
+      <th>TYPE</th>
+      <th>ADMIN</th>
+      <th>ADM0_A3</th>
+      <th>...</th>
+      <th>REGION_WB</th>
+      <th>NAME_LEN</th>
+      <th>LONG_LEN</th>
+      <th>ABBREV_LEN</th>
+      <th>TINY</th>
+      <th>HOMEPART</th>
+      <th>MIN_ZOOM</th>
+      <th>MIN_LABEL</th>
+      <th>MAX_LABEL</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Admin-0 country</td>
+      <td>3.0</td>
+      <td>Afghanistan</td>
+      <td>AFG</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>Sovereign country</td>
+      <td>Afghanistan</td>
+      <td>AFG</td>
+      <td>...</td>
+      <td>South Asia</td>
+      <td>11.0</td>
+      <td>11.0</td>
+      <td>4.0</td>
+      <td>-99.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>7.0</td>
+      <td>POLYGON ((61.21081709172574 35.65007233330923,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>Admin-0 country</td>
+      <td>3.0</td>
+      <td>Angola</td>
+      <td>AGO</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>Sovereign country</td>
+      <td>Angola</td>
+      <td>AGO</td>
+      <td>...</td>
+      <td>Sub-Saharan Africa</td>
+      <td>6.0</td>
+      <td>6.0</td>
+      <td>4.0</td>
+      <td>-99.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>7.0</td>
+      <td>(POLYGON ((23.90415368011818 -11.7222815894063...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>Admin-0 country</td>
+      <td>6.0</td>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>Sovereign country</td>
+      <td>Albania</td>
+      <td>ALB</td>
+      <td>...</td>
+      <td>Europe &amp; Central Asia</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>4.0</td>
+      <td>-99.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>5.0</td>
+      <td>10.0</td>
+      <td>POLYGON ((21.0200403174764 40.84272695572588, ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>Admin-0 country</td>
+      <td>4.0</td>
+      <td>United Arab Emirates</td>
+      <td>ARE</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>Sovereign country</td>
+      <td>United Arab Emirates</td>
+      <td>ARE</td>
+      <td>...</td>
+      <td>Middle East &amp; North Africa</td>
+      <td>20.0</td>
+      <td>20.0</td>
+      <td>6.0</td>
+      <td>-99.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>9.0</td>
+      <td>POLYGON ((51.57951867046327 24.24549713795111,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>Admin-0 country</td>
+      <td>2.0</td>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>Sovereign country</td>
+      <td>Argentina</td>
+      <td>ARG</td>
+      <td>...</td>
+      <td>Latin America &amp; Caribbean</td>
+      <td>9.0</td>
+      <td>9.0</td>
+      <td>4.0</td>
+      <td>-99.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>7.0</td>
+      <td>(POLYGON ((-66.95992000000001 -54.896810000000...</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 72 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>177
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries_subset</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[[</span><span class="s1">&#39;ADM0_A3&#39;</span><span class="p">,</span> <span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;CONTINENT&#39;</span><span class="p">,</span> <span class="s1">&#39;POP_EST&#39;</span><span class="p">,</span> <span class="s1">&#39;GDP_MD_EST&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries_subset</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">countries_subset</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries_subset</span> <span class="o">=</span> <span class="n">countries_subset</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;adm0_a3&#39;</span><span class="p">:</span> <span class="s1">&#39;iso_a3&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries_subset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>iso_a3</th>
+      <th>name</th>
+      <th>continent</th>
+      <th>pop_est</th>
+      <th>gdp_md_est</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AFG</td>
+      <td>Afghanistan</td>
+      <td>Asia</td>
+      <td>34124811.0</td>
+      <td>64080.0</td>
+      <td>POLYGON ((61.21081709172574 35.65007233330923,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AGO</td>
+      <td>Angola</td>
+      <td>Africa</td>
+      <td>29310273.0</td>
+      <td>189000.0</td>
+      <td>(POLYGON ((23.90415368011818 -11.7222815894063...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ALB</td>
+      <td>Albania</td>
+      <td>Europe</td>
+      <td>3047987.0</td>
+      <td>33900.0</td>
+      <td>POLYGON ((21.0200403174764 40.84272695572588, ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ARE</td>
+      <td>United Arab Emirates</td>
+      <td>Asia</td>
+      <td>6072475.0</td>
+      <td>667200.0</td>
+      <td>POLYGON ((51.57951867046327 24.24549713795111,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ARG</td>
+      <td>Argentina</td>
+      <td>South America</td>
+      <td>44293293.0</td>
+      <td>879400.0</td>
+      <td>(POLYGON ((-66.95992000000001 -54.896810000000...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries_subset</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;ne_110m_admin_0_countries.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="natural-earth-cities-dataset">
+<h2>Natural Earth - Cities dataset<a class="headerlink" href="#natural-earth-cities-dataset" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-populated-places/">http://www.naturalearthdata.com/downloads/110m-cultural-vectors/110m-populated-places/</a> (simple, version 4.0.0, downloaded May 2018)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./raw/original_data_ne/ne_110m_populated_places_simple.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scalerank</th>
+      <th>natscale</th>
+      <th>labelrank</th>
+      <th>featurecla</th>
+      <th>name</th>
+      <th>namepar</th>
+      <th>namealt</th>
+      <th>diffascii</th>
+      <th>nameascii</th>
+      <th>adm0cap</th>
+      <th>...</th>
+      <th>pop_other</th>
+      <th>rank_max</th>
+      <th>rank_min</th>
+      <th>geonameid</th>
+      <th>meganame</th>
+      <th>ls_name</th>
+      <th>ls_match</th>
+      <th>checkme</th>
+      <th>min_zoom</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8</td>
+      <td>10</td>
+      <td>3</td>
+      <td>Admin-0 capital</td>
+      <td>Vatican City</td>
+      <td>None</td>
+      <td>None</td>
+      <td>0</td>
+      <td>Vatican City</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>562430</td>
+      <td>2</td>
+      <td>2</td>
+      <td>6691831.0</td>
+      <td>None</td>
+      <td>Vatican City</td>
+      <td>1</td>
+      <td>0</td>
+      <td>7.0</td>
+      <td>POINT (12.45338654497177 41.90328217996012)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>7</td>
+      <td>20</td>
+      <td>0</td>
+      <td>Admin-0 capital</td>
+      <td>San Marino</td>
+      <td>None</td>
+      <td>None</td>
+      <td>0</td>
+      <td>San Marino</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>7</td>
+      <td>7</td>
+      <td>3168070.0</td>
+      <td>None</td>
+      <td>San Marino</td>
+      <td>1</td>
+      <td>5</td>
+      <td>6.1</td>
+      <td>POINT (12.44177015780014 43.936095834768)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>20</td>
+      <td>0</td>
+      <td>Admin-0 capital</td>
+      <td>Vaduz</td>
+      <td>None</td>
+      <td>None</td>
+      <td>0</td>
+      <td>Vaduz</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>33009</td>
+      <td>7</td>
+      <td>5</td>
+      <td>3042030.0</td>
+      <td>None</td>
+      <td>Vaduz</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6.7</td>
+      <td>POINT (9.516669472907267 47.13372377429357)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6</td>
+      <td>30</td>
+      <td>8</td>
+      <td>Admin-0 capital alt</td>
+      <td>Lobamba</td>
+      <td>None</td>
+      <td>None</td>
+      <td>0</td>
+      <td>Lobamba</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>5</td>
+      <td>4</td>
+      <td>935048.0</td>
+      <td>None</td>
+      <td>Lobamba</td>
+      <td>1</td>
+      <td>5</td>
+      <td>6.0</td>
+      <td>POINT (31.19999710971274 -26.46666746135247)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>30</td>
+      <td>8</td>
+      <td>Admin-0 capital</td>
+      <td>Luxembourg</td>
+      <td>None</td>
+      <td>None</td>
+      <td>0</td>
+      <td>Luxembourg</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>106219</td>
+      <td>9</td>
+      <td>8</td>
+      <td>2960316.0</td>
+      <td>None</td>
+      <td>Luxembourg</td>
+      <td>1</td>
+      <td>0</td>
+      <td>6.0</td>
+      <td>POINT (6.130002806227083 49.61166037912108)</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 38 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">cities</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>243
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities_subset</span> <span class="o">=</span> <span class="n">cities</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities_subset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Vatican City</td>
+      <td>POINT (12.45338654497177 41.90328217996012)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>San Marino</td>
+      <td>POINT (12.44177015780014 43.936095834768)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Vaduz</td>
+      <td>POINT (9.516669472907267 47.13372377429357)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Lobamba</td>
+      <td>POINT (31.19999710971274 -26.46666746135247)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Luxembourg</td>
+      <td>POINT (6.130002806227083 49.61166037912108)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cities_subset</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;ne_110m_populated_places.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="natural-earth-rivers-dataset">
+<h2>Natural Earth - Rivers dataset<a class="headerlink" href="#natural-earth-rivers-dataset" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.naturalearthdata.com/downloads/50m-physical-vectors/50m-rivers-lake-centerlines/">http://www.naturalearthdata.com/downloads/50m-physical-vectors/50m-rivers-lake-centerlines/</a> (version 4.0.0, downloaded May 2018)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rivers</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;zip://./raw/ne_50m_rivers_lake_centerlines.zip&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rivers</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scalerank</th>
+      <th>featurecla</th>
+      <th>name</th>
+      <th>note</th>
+      <th>min_zoom</th>
+      <th>name_alt</th>
+      <th>name_en</th>
+      <th>min_label</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>Lake Centerline</td>
+      <td>Kama</td>
+      <td>None</td>
+      <td>5.0</td>
+      <td>None</td>
+      <td>Kama</td>
+      <td>6.0</td>
+      <td>LINESTRING (51.9371337598152 55.70106609892139...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6</td>
+      <td>River</td>
+      <td>Kama</td>
+      <td>None</td>
+      <td>5.0</td>
+      <td>None</td>
+      <td>Kama</td>
+      <td>6.0</td>
+      <td>LINESTRING (53.69384765584471 58.2063174502901...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Lake Centerline</td>
+      <td>Abay</td>
+      <td>None</td>
+      <td>3.0</td>
+      <td>None</td>
+      <td>Abay</td>
+      <td>4.0</td>
+      <td>LINESTRING (37.11301150887408 11.8549872909308...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>Lake Centerline</td>
+      <td>Al Furat</td>
+      <td>None</td>
+      <td>3.0</td>
+      <td>None</td>
+      <td>Al Furat</td>
+      <td>4.0</td>
+      <td>LINESTRING (38.56119184742585 35.8626433379197...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>Lake Centerline</td>
+      <td>Alabama</td>
+      <td>None</td>
+      <td>5.0</td>
+      <td>None</td>
+      <td>Alabama</td>
+      <td>6.0</td>
+      <td>(LINESTRING (-86.52176754393696 33.03211843501...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Remove rows with missing geometry:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">rivers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>462
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rivers</span> <span class="o">=</span> <span class="n">rivers</span><span class="p">[</span><span class="o">~</span><span class="n">rivers</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">rivers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>461
+</pre></div>
+</div>
+</div>
+</div>
+<p>Subset of the columns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rivers_subset</span> <span class="o">=</span> <span class="n">rivers</span><span class="p">[[</span><span class="s1">&#39;featurecla&#39;</span><span class="p">,</span> <span class="s1">&#39;name_en&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name_en&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rivers_subset</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>featurecla</th>
+      <th>name</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Lake Centerline</td>
+      <td>Kama</td>
+      <td>LINESTRING (51.9371337598152 55.70106609892139...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>River</td>
+      <td>Kama</td>
+      <td>LINESTRING (53.69384765584471 58.2063174502901...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Lake Centerline</td>
+      <td>Abay</td>
+      <td>LINESTRING (37.11301150887408 11.8549872909308...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Lake Centerline</td>
+      <td>Al Furat</td>
+      <td>LINESTRING (38.56119184742585 35.8626433379197...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Lake Centerline</td>
+      <td>Alabama</td>
+      <td>(LINESTRING (-86.52176754393696 33.03211843501...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rivers_subset</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;ne_50m_rivers_lake_centerlines.shp&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="paris-districts">
+<h2>Paris districts<a class="headerlink" href="#paris-districts" title="Permalink to this headline">¶</a></h2>
+<p>Source: <a class="reference external" href="https://opendata.paris.fr/explore/dataset/quartier_paris/">https://opendata.paris.fr/explore/dataset/quartier_paris/</a> (downloaded as GeoJSON file on August 20, 2018)</p>
+<p>Administrative districts, polygon dataset</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;./raw/quartier_paris.geojson&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>n_sq_qu</th>
+      <th>perimetre</th>
+      <th>objectid</th>
+      <th>longueur</th>
+      <th>c_qu</th>
+      <th>surface</th>
+      <th>n_sq_ar</th>
+      <th>c_quinsee</th>
+      <th>l_qu</th>
+      <th>c_ar</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>750000010</td>
+      <td>2139.625388</td>
+      <td>50</td>
+      <td>2139.535591</td>
+      <td>10</td>
+      <td>271750.323937</td>
+      <td>750000003</td>
+      <td>7510302</td>
+      <td>Enfants-Rouges</td>
+      <td>3</td>
+      <td>POLYGON ((2.367101341254551 48.86162755885409,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>750000016</td>
+      <td>3283.163371</td>
+      <td>56</td>
+      <td>3282.999717</td>
+      <td>16</td>
+      <td>378252.153674</td>
+      <td>750000004</td>
+      <td>7510404</td>
+      <td>Notre-Dame</td>
+      <td>4</td>
+      <td>POLYGON ((2.361313701339139 48.84858030437791,...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>750000018</td>
+      <td>4052.729521</td>
+      <td>58</td>
+      <td>4052.473226</td>
+      <td>18</td>
+      <td>798389.398463</td>
+      <td>750000005</td>
+      <td>7510502</td>
+      <td>Jardin-des-Plantes</td>
+      <td>5</td>
+      <td>POLYGON ((2.364561460891576 48.84365746114398,...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>750000025</td>
+      <td>3827.253353</td>
+      <td>7</td>
+      <td>3827.053421</td>
+      <td>25</td>
+      <td>826559.436780</td>
+      <td>750000007</td>
+      <td>7510701</td>
+      <td>Saint-Thomas-d'Aquin</td>
+      <td>7</td>
+      <td>POLYGON ((2.322133508640103 48.84924973446431,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>750000039</td>
+      <td>3245.891413</td>
+      <td>21</td>
+      <td>3245.778222</td>
+      <td>39</td>
+      <td>609034.654451</td>
+      <td>750000010</td>
+      <td>7511003</td>
+      <td>Porte-Saint-Martin</td>
+      <td>10</td>
+      <td>POLYGON ((2.363917183048105 48.86754108728465,...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span> <span class="o">=</span> <span class="n">districts</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;l_qu&#39;</span><span class="p">:</span> <span class="s1">&#39;district_name&#39;</span><span class="p">,</span> <span class="s1">&#39;c_qu&#39;</span><span class="p">:</span> <span class="s1">&#39;id&#39;</span><span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Add population data (based on pdfs downloaded from ..):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">population</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./raw/paris-population.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">population</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">population</span><span class="o">.</span><span class="n">district_name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">population</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">population</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span>
+    <span class="s1">&#39;javel&#39;</span><span class="p">:</span> <span class="s1">&#39;javel 15art&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;saint avoye&#39;</span><span class="p">:</span> <span class="s1">&#39;sainte avoie&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;saint germain l&#39;auxerrois&quot;</span><span class="p">:</span> <span class="s2">&quot;st germain l&#39;auxerrois&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;plaine monceau&#39;</span><span class="p">:</span> <span class="s1">&#39;plaine de monceaux&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;la   chapelle&#39;</span><span class="p">:</span> <span class="s1">&#39;la chapelle&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span><span class="p">[</span><span class="s1">&#39;temp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">districts</span><span class="o">.</span><span class="n">district_name</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+                              <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;é&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;è&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ê&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;ô&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">districts</span><span class="p">,</span> <span class="n">population</span><span class="p">[[</span><span class="s1">&#39;population&#39;</span><span class="p">,</span> <span class="s1">&#39;temp&#39;</span><span class="p">]],</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">districts</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span> <span class="o">=</span> <span class="n">res</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;district_name&#39;</span><span class="p">,</span> <span class="s1">&#39;population&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>district_name</th>
+      <th>population</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>St-Germain-l'Auxerrois</td>
+      <td>1672</td>
+      <td>POLYGON ((2.344593389828428 48.85404991486192,...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Halles</td>
+      <td>8984</td>
+      <td>POLYGON ((2.349365804803003 48.86057567227663,...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Palais-Royal</td>
+      <td>3195</td>
+      <td>POLYGON ((2.339465868602756 48.86213531210705,...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Place-Vendôme</td>
+      <td>3044</td>
+      <td>POLYGON ((2.331944969393234 48.86491285292422,...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Gaillon</td>
+      <td>1345</td>
+      <td>POLYGON ((2.336320212305949 48.8679713890312, ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;processed/paris_districts.geojson&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;GeoJSON&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span> <span class="o">=</span> <span class="n">districts</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">32631</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">districts</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;paris_districts_utm.geojson&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;GeoJSON&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="commerces-de-paris">
+<h2>Commerces de Paris<a class="headerlink" href="#commerces-de-paris" title="Permalink to this headline">¶</a></h2>
+<p>Source: <a class="reference external" href="https://opendata.paris.fr/explore/dataset/commercesparis/">https://opendata.paris.fr/explore/dataset/commercesparis/</a> (downloaded as csv file (<code class="docutils literal notranslate"><span class="pre">commercesparis.csv</span></code>) on October 30, 2018)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;./raw/commercesparis.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/joris/miniconda3/lib/python3.5/site-packages/IPython/core/interactiveshell.py:2698: DtypeWarning: Columns (10) have mixed types. Specify dtype option on import or set low_memory=False.
+  interactivity=interactivity, compiler=compiler, result=result)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ORDRE                              2379
+ARRONDISSEMENT                    75001
+QUARTIER                              3
+IRIS                         7.5101e+08
+ILOT                         7.5101e+10
+NUMERO                                3
+LET                                 NaN
+TYPE VOIE                           RUE
+LIBELLE VOIE                  PYRAMIDES
+ADRESSE COMPLETE        3 RUE PYRAMIDES
+CFA                                7902
+X                                651020
+Y                           6.86291e+06
+XY                  48.864299, 2.332401
+SEQUENCE                              3
+SITUATION                       Sur rue
+CODE ACTIVITE                     CH106
+LIBELLE ACTIVITE    Restaurant européen
+SURFACE                               1
+CC ID                               NaN
+CC NIV                              NaN
+Name: 0, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Take subset of the restaurants:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;CODE ACTIVITE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;CH1&#39;</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span><span class="p">[</span><span class="s1">&#39;LIBELLE ACTIVITE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Restaurant traditionnel français                  1947
+Restaurant asiatique                              1643
+Restaurant européen                               1178
+Restaurant indien, pakistanais et Moyen Orient     394
+Restaurant maghrébin                               207
+Restaurant africain                                138
+Autre restaurant du monde                          107
+Restaurant central et sud américain                 97
+Restaurant antillais                                27
+Name: LIBELLE ACTIVITE, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span> <span class="o">=</span> <span class="n">restaurants</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;XY&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Translate the restaurants and rename column:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span><span class="p">[</span><span class="s1">&#39;LIBELLE ACTIVITE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">restaurants</span><span class="p">[</span><span class="s1">&#39;LIBELLE ACTIVITE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span>
+    <span class="s1">&#39;Restaurant traditionnel français&#39;</span><span class="p">:</span> <span class="s1">&#39;Traditional French restaurant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restaurant asiatique&#39;</span><span class="p">:</span> <span class="s1">&#39;Asian restaurant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restaurant européen&#39;</span><span class="p">:</span> <span class="s1">&#39;European restuarant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restaurant indien, pakistanais et Moyen Orient&#39;</span><span class="p">:</span> <span class="s1">&#39;Indian / Middle Eastern restaurant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restaurant maghrébin&#39;</span><span class="p">:</span> <span class="s1">&#39;Maghrebian restaurant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restaurant africain&#39;</span><span class="p">:</span> <span class="s1">&#39;African restaurant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Autre restaurant du monde&#39;</span><span class="p">:</span> <span class="s1">&#39;Other world restaurant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restaurant central et sud américain&#39;</span><span class="p">:</span> <span class="s1">&#39;Central and South American restuarant&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Restaurant antillais&#39;</span><span class="p">:</span> <span class="s1">&#39;Caribbean restaurant&#39;</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span> <span class="o">=</span> <span class="n">restaurants</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;LIBELLE ACTIVITE&#39;</span><span class="p">:</span> <span class="s1">&#39;type&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create GeoDataFrame</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Point</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">restaurants</span><span class="p">[</span><span class="s1">&#39;XY&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Point</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">restaurants</span><span class="p">[[</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;geometry&#39;</span><span class="p">]],</span> <span class="n">crs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;init&#39;</span><span class="p">:</span> <span class="s1">&#39;epsg:4326&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>type</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>European restuarant</td>
+      <td>POINT (2.332401 48.864299)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Traditional French restaurant</td>
+      <td>POINT (2.331778 48.86526)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Traditional French restaurant</td>
+      <td>POINT (2.332541 48.865932)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Indian / Middle Eastern restaurant</td>
+      <td>POINT (2.332785 48.866285)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Traditional French restaurant</td>
+      <td>POINT (2.332008 48.866444)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">restaurants</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="s2">&quot;processed/paris_restaurants.gpkg&quot;</span><span class="p">,</span> <span class="n">driver</span><span class="o">=</span><span class="s1">&#39;GPKG&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "hossainlab/health-gis",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./data"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Jubayer Hossain<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
